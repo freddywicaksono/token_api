@@ -15,3 +15,36 @@ public function token()
 $method = $_SERVER['REQUEST_METHOD'];
 $valid_token = $db->token();
 ```
+#### 3. Revisi kode program untuk metode GET
+```
+case 'GET':
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+        }
+        if(isset($_GET['nim'])){
+            $nim = $_GET['nim'];
+        }
+        if(isset($_GET['token'])){
+            $token = $_GET['token'];
+        }
+        if($token !== $valid_token){
+            $val['status']='failed';
+            $val['message']='Token not valid';
+        }else{
+            if($id>0){    
+                $result = $mahasiswa->get_by_id($id);
+            }elseif($nim>0){
+                $result = $mahasiswa->get_by_nim($nim);
+            } else {
+                $result = $mahasiswa->get_all();
+            }    
+            $val = array();
+            while ($row = $result->fetch_assoc()) {
+                $val[] = $row;
+            }
+        }
+              
+        header('Content-Type: application/json');
+        echo json_encode($val);
+        break;
+```
