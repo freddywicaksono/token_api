@@ -48,7 +48,7 @@ case 'GET':
         echo json_encode($val);
         break;
 ```
-#### 4. Revisi kode program untuk metode POST:
+#### 4. Revisi kode program untuk metode POST pada file mahasiswa_api.php
 ```
 case 'POST':
         // Add a new mahasiswa
@@ -77,7 +77,7 @@ case 'POST':
         echo json_encode($data);
         break;
 ```
-#### 5. Revisi Kode program untuk metode PUT:
+#### 5. Revisi Kode program untuk metode PUT pada file mahasiswa_api.php
 ```
 case 'PUT':
         // Update an existing data
@@ -120,7 +120,7 @@ case 'PUT':
         echo json_encode($data);
         break;
 ```
-#### 6. Revisi kode program untuk metode DELETE:
+#### 6. Revisi kode program untuk metode DELETE pada file mahasiswa_api.php
 ```
 case 'DELETE':
         // Delete a user
