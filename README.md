@@ -15,7 +15,7 @@ public function token()
 $method = $_SERVER['REQUEST_METHOD'];
 $valid_token = $db->token();
 ```
-#### 3. Revisi kode program untuk metode GET
+#### 3. Revisi kode program untuk metode GET pada file mahasiswa_api.php
 ```
 case 'GET':
         if(isset($_GET['id'])){
