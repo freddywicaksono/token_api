@@ -10,7 +10,7 @@ public function token()
     return $val;
 }
 ```
-#### 2. Tambahkan variabel untuk menampung token yang valid pada file mahasiswa_api.php
+#### 2. Tambahkan variabel $valid_token untuk menampung token yang valid pada file mahasiswa_api.php
 ```
 $method = $_SERVER['REQUEST_METHOD'];
 $valid_token = $db->token();
