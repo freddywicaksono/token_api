@@ -48,3 +48,114 @@ case 'GET':
         echo json_encode($val);
         break;
 ```
+#### 4. Revisi kode program untuk metode POST:
+```
+case 'POST':
+        // Add a new mahasiswa
+        $mahasiswa->nim = $_POST['nim'];
+        $mahasiswa->nama = $_POST['nama'];
+        $mahasiswa->jk = $_POST['jk'];
+        $mahasiswa->prodi = $_POST['prodi'];
+        $token = $_POST['token'];
+
+        if($token !== $valid_token){
+            $data['status']='failed';
+            $data['message']='Token not valid';
+        }else{
+            $mahasiswa->insert();
+            $a = $db->affected_rows();
+            if($a>0){
+                $data['status']='success';
+                $data['message']='Data Mahasiswa created successfully.';
+            } else {
+                $data['status']='failed';
+                $data['message']='Data Mahasiswa not created.';
+            }
+        }
+        
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        break;
+```
+#### 5. Revisi Kode program untuk metode PUT:
+```
+case 'PUT':
+        // Update an existing data
+        $_PUT = [];
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+        }
+        if(isset($_GET['nim'])){
+            $nim = $_GET['nim'];
+        }
+    
+        parse_str(file_get_contents("php://input"), $_PUT);
+        $mahasiswa->nim = $_PUT['nim'];
+        $mahasiswa->nama = $_PUT['nama'];
+        $mahasiswa->jk = $_PUT['jk'];
+        $mahasiswa->prodi = $_PUT['prodi'];
+        $token = $_PUT['token'];
+        if($token !== $valid_token){
+            $data['status']='failed';
+            $data['message']='Token not valid';
+        }else{
+            if($id>0){    
+                $mahasiswa->update($id);
+            }elseif($nim<>""){
+                $mahasiswa->update_by_nim($nim);
+            } else {
+                
+            } 
+            $a = $db->affected_rows();
+            if($a>0){
+                $data['status']='success';
+                $data['message']='Data Mahasiswa updated successfully.';
+            } else {
+                $data['status']='failed';
+                $data['message']='Data Mahasiswa update failed.';
+            } 
+        }
+               
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        break;
+```
+#### 6. Revisi kode program untuk metode DELETE:
+```
+case 'DELETE':
+        // Delete a user
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+        }
+        if(isset($_GET['nim'])){
+            $nim = $_GET['nim'];
+        }
+        if(isset($_GET['token'])){
+            $token = $_GET['token'];
+        }
+        if($token !== $valid_token){
+            $data['status']='failed';
+            $data['message']='Token not valid';
+        }else{
+
+            if($id>0){    
+                $mahasiswa->delete($id);
+            }elseif($nim>0){
+                $mahasiswa->delete_by_nim($nim);
+            } else {
+                
+            }             
+            $a = $db->affected_rows();
+            if($a>0){
+                $data['status']='success';
+                $data['message']='Data Mahasiswa deleted successfully.';
+            } else {
+                $data['status']='failed';
+                $data['message']='Data Mahasiswa delete failed.';
+            }
+        }
+                
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        break;
+```
