@@ -1,5 +1,6 @@
 # SETUP Token API
 #### 1. Tambahkan Fungsi pada file database.php
+```
 public function token()
     {
         date_default_timezone_set('Asia/Jakarta');
@@ -8,3 +9,4 @@ public function token()
         $val = MD5($kode . $today);
         return $val;
     }
+```
